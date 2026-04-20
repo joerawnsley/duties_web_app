@@ -1,0 +1,7 @@
+name: learn-github-actions
+run-name: running deployment
+on: [push]
+jobs:
+    deploy-flask-app:
+        runs-on: ubuntu-latest
+        steps:
