@@ -1,0 +1,7 @@
+services:
+    pythonapp:
+        image: sebinxavi/python-web-app:1
+        container_name: flask-app
+        ports:
+            - "3000:5000"
+        restart: always
