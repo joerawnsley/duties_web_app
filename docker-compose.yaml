@@ -1,6 +1,6 @@
 services:
     pythonapp:
-        image: sebinxavi/python-web-app:1
+        image: jbr-flask-app:latest
         container_name: flask-app
         ports:
             - "80:5000"
