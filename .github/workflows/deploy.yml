@@ -1,6 +1,11 @@
 name: learn-github-actions
 run-name: running deployment
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    
 permissions:
     id-token: write
 jobs:
@@ -13,7 +18,7 @@ jobs:
           - name: Install and run tests
             run: |
               pip install -r requirements.txt
-              pytest
+              pytest -v
 
           - name: Configure AWS credentials
             uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
