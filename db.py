@@ -3,7 +3,7 @@ import json
 from dotenv import load_dotenv
 
 load_dotenv()
-DB_MODE = os.getenv("DB_MODE")
+DB_MODE = os.getenv("DB_MODE", "mock")
 
 with open('mock_data/duties.json') as duties:
     mock_duties = json.load(duties)
