@@ -2,9 +2,6 @@ from flask import Flask, render_template
 import db
 app = Flask(__name__)
 
-# class Duty:
-#   def __init__(self, identifier):
-#     self.identifier = identifier
 
 
 @app.route('/')
