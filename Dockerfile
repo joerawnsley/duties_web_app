@@ -1,4 +1,4 @@
-FROM  --platform=linux/amd64 python:3.12-alpine3.22
+FROM  --platform=linux/amd64 python:3.12-slim
     
 RUN   mkdir  /var/flasksite
 
@@ -6,7 +6,7 @@ COPY  .  /var/flasksite/
 
 WORKDIR  /var/flasksite/
 
-RUN apk add python3 
+RUN pip install --upgrade pip
 
 RUN  pip install -r requirements.txt 
 
