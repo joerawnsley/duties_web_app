@@ -1,4 +1,4 @@
-FROM  --platform=linux/amd64 python:3.14.4-alpine3.22
+FROM  --platform=linux/amd64 python:3.12-alpine3.22
     
 RUN   mkdir  /var/flasksite
 
