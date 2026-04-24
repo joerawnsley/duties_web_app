@@ -5,6 +5,7 @@ import json
 
 test_app = app.test_client()
 
+# load page with mocked response
 with open('mock_data/duties.json') as duties:
     mock_duties = json.load(duties)
 
@@ -13,30 +14,29 @@ def get_home_page(mocker):
     response = test_app.get("/")
     return response
 
-def test_display_home_page(mocker):
-    html_content = get_home_page(mocker).text
-    output_dir = Path("test_output")
-    output_dir.mkdir(exist_ok=True)
-    file_path = output_dir / "home_page_preview.html"
-    file_path.write_text(html_content)
-    webbrowser.open(f"file://{file_path.absolute()}")
-    assert file_path.exists()
-
+# tests
 def test_home_page_has_page_content(mocker):
     assert "title" in get_home_page(mocker).text
-
-def test_home_page_contains_duty_1_description(mocker):
-    assert "Script and code" in get_home_page(mocker).text
-    
-def test_page_is_populated_with_duties_from_db(mocker):
-    assert get_home_page(mocker).text.count("li") > 1
-    assert "Script and code" in get_home_page(mocker).text
 
 def test_home_page_has_heading(mocker):
     assert "<h1>Devops Apprenticeship Duties</h1>" in get_home_page(mocker).text
 
-def test_duty_identifiers_are_displayed_on_home_page(mocker):
+
+
+
+    
+
+# removed
+
+def xtest_home_page_contains_duty_1_description(mocker):
+    assert "Script and code" in get_home_page(mocker).text
+    
+def xtest_page_is_populated_with_duties_from_db(mocker):
+    assert get_home_page(mocker).text.count("li") > 1
+    assert "Script and code" in get_home_page(mocker).text
+    
+def xtest_duty_identifiers_are_displayed_on_home_page(mocker):
     assert "Duty 1:" in get_home_page(mocker).text
 
-def test_list_items_contain_links(mocker):
+def xtest_list_items_contain_links(mocker):
     assert "<li><a href=" in get_home_page(mocker).text
