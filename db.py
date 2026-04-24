@@ -13,3 +13,12 @@ def get_duties():
         return mock_duties
     else:
         pass
+    
+with open('mock_data/coins.json') as coins:
+    mock_coins = json.load(coins)
+
+def get_coins():
+    if DB_MODE == "mock":
+        return mock_coins
+    else:
+        pass
