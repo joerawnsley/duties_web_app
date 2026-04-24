@@ -37,7 +37,7 @@ def test_automate_page_has_heading(mocker):
 def test_automate_page_contains_form(mocker):
     page = get_automate_page(mocker).text
     assert "<form" in page
-    assert "<button>" in page
+    assert "<button" in page
     assert "type='submit'" in page or 'type="submit"' in page
     assert "input" in page and "text" in page
 
