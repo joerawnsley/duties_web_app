@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 test_app = app.test_client()
 
 # load pages with mocked response
-with open('mock_data/duties.json') as duties:
+with open('seed_data/duties.json') as duties:
     mock_duties = json.load(duties)
 
 def get_home_page(mocker):    
