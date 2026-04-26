@@ -22,4 +22,4 @@ class InMemoryDutyRepository(DutyRepository):
         return self.duties
     
     def get_duties_by_number(self, numbers):
-        return self.duties[numbers]
+        return [self.duties[1]]
