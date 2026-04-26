@@ -34,7 +34,7 @@ def test_save_coin_adds_coin_to_repo(coins_repo):
 def test_delete_coin_removes_coin_from_repo(coins_repo):
     coins_repo.save_coin("Houston, Prepare to Launch", "houston", [5, 7, 10]
     )
-    coins_repo.delete_coin_by_name("automate")
+    coins_repo.delete_coin_by_id("automate")
     assert coins_repo.list_all_coins() == [
          {
         "name": "Houston, Prepare to Launch",
@@ -42,3 +42,12 @@ def test_delete_coin_removes_coin_from_repo(coins_repo):
         "duties": [5, 7, 10]
     }
     ]
+
+def test_get_coin_by_id_returns_single_coin(coins_repo):
+    coins_repo.save_coin("Houston, Prepare to Launch", "houston", [5, 7, 10]
+    )
+    assert coins_repo.get_coin_by_id("houston") == {
+        "name": "Houston, Prepare to Launch",
+        "id": "houston",
+        "duties": [5, 7, 10]
+    }
