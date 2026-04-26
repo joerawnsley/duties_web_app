@@ -24,6 +24,11 @@ def test_save_coin_adds_coin_to_repo(coins_repo):
         "id": "automate",
         "duties": []
     },
+         {
+        "name": "Call Security",
+        "id": "security",
+        "duties": [8, 9, 11]
+    },
     {
         "name": "Houston, Prepare to Launch",
         "id": "houston",
@@ -36,6 +41,11 @@ def test_delete_coin_removes_coin_from_repo(coins_repo):
     )
     coins_repo.delete_coin_by_id("automate")
     assert coins_repo.list_all_coins() == [
+         {
+        "name": "Call Security",
+        "id": "security",
+        "duties": [8, 9, 11]
+    },
          {
         "name": "Houston, Prepare to Launch",
         "id": "houston",

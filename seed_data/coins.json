@@ -3,5 +3,10 @@
         "name": "Automate!",
         "id": "automate",
         "duties": []
+    },
+    {
+        "name": "Call Security",
+        "id": "security",
+        "duties": [8, 9, 11]
     }
 ]
