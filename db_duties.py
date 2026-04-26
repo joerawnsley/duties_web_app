@@ -22,4 +22,8 @@ class InMemoryDutyRepository(DutyRepository):
         return self.duties
     
     def get_duties_by_number(self, numbers):
-        return [self.duties[1]]
+        if type(numbers) == int:
+            return list(filter(lambda duty: duty["number"] == numbers, self.duties))
+        elif type(numbers) == list:
+            return list(filter(lambda duty: duty["number"] in numbers, self.duties))
+
