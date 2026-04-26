@@ -26,6 +26,9 @@ def index():
 def automate():
   return render_template("automate.html")
 
+@app.route('/security')
+def security():
+  return render_template("security.html")
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=5000)
