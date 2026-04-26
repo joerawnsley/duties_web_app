@@ -1,3 +1,5 @@
+import json
+
 class CoinRepository:
         # superclass for defining how coin repository should behave
     def get_coin_by_id(self, id):
@@ -32,5 +34,11 @@ class InMemoryCoinRepository(CoinRepository):
         return list(filter(lambda coin: coin["id"] == id, self.coins))[0]
     
     
-    
-    
+dabatase_location = "memory"
+
+if dabatase_location == "memory":
+    with open('seed_data/coins.json') as coins:
+        coins_repo = InMemoryCoinRepository(json.load(coins))
+
+elif dabatase_location == "real_db":
+    coins_repo = DatabaseCoinRepository()

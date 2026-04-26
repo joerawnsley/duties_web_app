@@ -1,3 +1,5 @@
+import json
+
 class DutyRepository:
     # superclass for defining how duty repository should behave
     def get_duties_by_number(self, numbers):
@@ -39,3 +41,12 @@ class InMemoryDutyRepository(DutyRepository):
             self.duties = list(filter(lambda duty: duty["number"] != numbers, self.duties))
         elif type(numbers) == list:
             self.duties = list(filter(lambda duty: duty["number"] not in numbers, self.duties))
+
+dabatase_location = "memory"
+
+if dabatase_location == "memory":
+  with open('seed_data/duties.json') as duties:
+      duties_repo = InMemoryDutyRepository(json.load(duties))
+      
+elif dabatase_location == "real_db":
+  duties_repo = DatabaseDutyRepository()
