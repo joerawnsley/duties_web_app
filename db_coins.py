@@ -20,5 +20,11 @@ class InMemoryCoinRepository(CoinRepository):
     
     def list_all_coins(self):
         return self.coins
+
+    def save_coin(self, name, id, duties):
+        new_coin = dict(name=name, id=id, duties=duties)
+        self.coins.append(new_coin)
+    
+    
     
     
