@@ -22,6 +22,7 @@ class InMemoryDutyRepository(DutyRepository):
         return self.duties
     
     def get_duties_by_number(self, numbers):
+        # return a single duty when passed a number, or a list of duties when passed a list of numbers
         if type(numbers) == int:
             return list(filter(lambda duty: duty["number"] == numbers, self.duties))
         elif type(numbers) == list:
@@ -32,6 +33,8 @@ class InMemoryDutyRepository(DutyRepository):
         self.duties.append(new_duty)
     
     def delete_duty_by_number(self, numbers):
+        # delete a single duty when passed a number, or a list of duties when passed a list of numbers
+
         if type(numbers) == int:
             self.duties = list(filter(lambda duty: duty["number"] != numbers, self.duties))
         elif type(numbers) == list:
