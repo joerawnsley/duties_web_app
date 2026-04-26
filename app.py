@@ -20,8 +20,7 @@ elif dabatase_location == "real_db":
 
 @app.route('/')
 def index():
-  coins = db.get_coins()
-  return render_template("index.html", coins=coins)
+  return render_template("index.html", coins=coins_repo.list_all_coins())
 
 @app.route('/automate')
 def automate():
