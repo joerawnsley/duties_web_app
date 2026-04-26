@@ -15,4 +15,10 @@ class DatabaseCoinRepository(CoinRepository):
 
 class InMemoryCoinRepository(CoinRepository):
     # in memory database to be used during development
-    pass
+    def __init__(self, coins):
+        self.coins = coins
+    
+    def list_all_coins(self):
+        return self.coins
+    
+    
