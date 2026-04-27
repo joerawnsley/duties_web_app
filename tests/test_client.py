@@ -1,5 +1,7 @@
 from app import app
 
+# these are integration tests as they test how the app integrates with templates, given a mock resopnse from the db
+
 test_app = app.test_client()
 
 # ----------------- home page -------------
@@ -85,3 +87,27 @@ def test_home_page_notifies_user_if_coins_not_available(mocker):
 def test_automate_page_has_heading():
     response = test_app.get("automate")
     assert "<h1>Coin: Automate!</h1>" in response.text
+
+def test_houston_page_has_heading(mocker):
+    mocker.patch('db_coins.coins_repo.get_coin_by_id', return_value={
+        "name": "Houston, Prepare to Launch",
+        "id": "houston",
+        "duties": [5, 7, 10]
+    })
+    response = test_app.get("houston")
+    assert "<h1>Coin: Houston, Prepare to Launch</h1>" in response.text
+    
+def test_houston_page_has_duties(mocker):
+    mocker.patch('db_coins.coins_repo.get_coin_by_id', return_value={
+        "name": "Houston, Prepare to Launch",
+        "id": "houston",
+        "duties": [5, 7, 10]
+    })
+    mocker.patch('db_duties.get_duties_by_number([5, 7, 10])', return_value=[
+        { "number": 5, "description": "Build and operate" },
+        { "number": 7, "description": "Provision cloud infrastructure" },
+        { "number": 10, "description": "Implement monitoring" }
+    ])
+    response = test_app.get("houston")
+    assert "<li><b>Duty 5:</b> Build and operate</li>" in response.text
+    assert response.count("<li>") == 3
