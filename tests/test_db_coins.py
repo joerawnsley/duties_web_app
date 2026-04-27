@@ -27,7 +27,7 @@ def test_save_coin_adds_coin_to_repo(coins_repo):
          {
         "name": "Call Security",
         "id": "security",
-        "duties": [8, 9, 11]
+        "duties": [1, 2, 3]
     },
     {
         "name": "Houston, Prepare to Launch",
@@ -44,7 +44,7 @@ def test_delete_coin_removes_coin_from_repo(coins_repo):
          {
         "name": "Call Security",
         "id": "security",
-        "duties": [8, 9, 11]
+        "duties": [1, 2, 3]
     },
          {
         "name": "Houston, Prepare to Launch",
