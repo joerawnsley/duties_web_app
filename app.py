@@ -28,14 +28,8 @@ def index():
 
 @app.route('/<coin_id>')
 def coin(coin_id):
-  if id:
-    return render_template("coin.html", coin_id=coin_id)
-
-# dynamic coin route to implement later
-# @app.route('/coin/<id>')
-# def coin():
-#   coin_id = request.args.get('id')
-#   return render_template('coin.html', coin_id=coin_id)
+  coin = db_coins.coins_repo.get_coin_by_id(coin_id)
+  return render_template("coin.html", coin=coin)
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=5000)
