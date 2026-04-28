@@ -16,7 +16,11 @@ def get_coin(coin_id):
   duties = db_duties.duties_repo.get_duties_by_number(coin["duties"])
   return render_template("coin.html", coin=coin, duties=duties)
 
-# @app.route('/<coin_id>')
+@app.route('/<coin_id>', methods=['POST'])
+def add_duty_to_coin(coin_id):
+  coin = db_coins.coins_repo.get_coin_by_id(coin_id)
+  duties = db_duties.duties_repo.get_duties_by_number(coin["duties"])
+  return render_template("coin.html", coin=coin, duties=duties)
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=5000)
