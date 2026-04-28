@@ -111,3 +111,11 @@ def test_houston_page_has_duties(mocker):
     response = test_app.get("houston")
     assert "<li><b>Duty 5:</b> Build and operate</li>" in response.text
     assert response.text.count("<li>") == 3
+    
+# ------POST route-----------
+
+def test_form_submit_displays_new_duties(mocker):
+    mocker.patch('db_duties.duties_repo.get_duties_by_number', return_value=[])
+    test_app.get("automate")
+    response = test_app.post("/automate", data={"number": "1", "description": "Script and Code"})
+    assert "<li><b>Duty 1:</b> Script and code</li>" in response.text
