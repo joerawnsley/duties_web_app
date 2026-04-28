@@ -10,6 +10,8 @@ class CoinRepository:
         pass
     def list_all_coins(self):
         pass
+    def add_duty_to_coin(self):
+        pass
     
 class DatabaseCoinRepository(CoinRepository):
     # placeholder for real db interaction logic
@@ -33,6 +35,11 @@ class InMemoryCoinRepository(CoinRepository):
     def get_coin_by_id(self, id):
         return list(filter(lambda coin: coin["id"] == id, self.coins))[0]
     
+    def add_duty_to_coin(self, coin_id, duty_number):
+        for coin in self.coins:
+            if coin["id"] == coin_id and duty_number not in coin["duties"]:
+                coin["duties"].append(duty_number)
+                coin["duties"].sort()
     
 dabatase_location = "memory"
 
