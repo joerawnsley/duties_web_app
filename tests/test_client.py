@@ -116,6 +116,7 @@ def test_houston_page_has_duties(mocker):
 
 def test_form_submit_displays_new_duties(mocker):
     mocker.patch('db_duties.duties_repo.get_duties_by_number', return_value=[])
-    test_app.get("automate")
+    response = test_app.get("automate")
+    assert "<li><b>Duty 1:</b> Script and code</li>" not in response.text
     response = test_app.post("/automate", data={"number": "1", "description": "Script and code"})
     assert "<li><b>Duty 1:</b> Script and code</li>" in response.text
