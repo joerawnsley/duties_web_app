@@ -16,17 +16,22 @@ def get_coin(coin_id):
 
 @app.route('/coin/<coin_id>', methods=['POST'])
 def add_duty_to_coin(coin_id):
-  
-  duty_number = int(request.form.get("number"))
-  duty_desc = request.form.get("description")
-
-  db_duties.duties_repo.save_duty(duty_number, duty_desc)
-  db_coins.coins_repo.add_duty_to_coin(coin_id, duty_number)
+  error = None
+  try:
+    duty_number = int(request.form.get("number"))
+    duty_desc = request.form.get("description")
+    error = False
+    db_duties.duties_repo.save_duty(duty_number, duty_desc)
+    db_coins.coins_repo.add_duty_to_coin(coin_id, duty_number)
+    
+  except ValueError:
+    error = "Error: Duty number must be an integer"
   
   coin = db_coins.coins_repo.get_coin_by_id(coin_id)
   duties = db_duties.duties_repo.get_duties_by_number(coin["duties"])
   
-  return render_template("coin.html", coin=coin, duties=duties)
+  print(error)
+  return render_template("coin.html", coin=coin, duties=duties, error=error)
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=5000)

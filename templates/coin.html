@@ -21,6 +21,9 @@
             <input name="description" id="description" type="text">
             <button type="submit">Submit</button>
         </form>
+        {%if error %}
+            <p><b>{{error}}</b></p>
+        {%endif%}
         <a href="../">back</a>
     </body>
 </html>
