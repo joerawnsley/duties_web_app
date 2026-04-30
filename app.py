@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request
 import db_coins, db_duties
-from db_duties import InMemoryDutyRepository, DatabaseDutyRepository
-from db_coins import InMemoryCoinRepository, DatabaseCoinRepository
 app = Flask(__name__)
 
 
