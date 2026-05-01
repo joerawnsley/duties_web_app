@@ -9,7 +9,7 @@ on:
 permissions:
     id-token: write
 jobs:
-    deploy:
+    test:
         runs-on: ubuntu-latest
         env:
           FLASK_APP: app.py
@@ -32,7 +32,13 @@ jobs:
           - name: Run tests
             run:  python3 -m pytest -v
 
-
+    deploy:
+       runs-on: ubuntu-latest
+       needs: test
+       steps:
+          - name: Checkout
+            uses: actions/checkout@v5
+            
           - name: Configure AWS credentials
             uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
             with:
