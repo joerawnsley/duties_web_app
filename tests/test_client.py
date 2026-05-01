@@ -1,5 +1,4 @@
 from app import app
-from db_duties import duties_repo
 
 # these are integration tests as they test how the app integrates with templates, given a mock resopnse from the db
 
