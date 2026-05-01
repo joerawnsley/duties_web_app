@@ -11,15 +11,27 @@ permissions:
 jobs:
     deploy:
         runs-on: ubuntu-latest
+        env:
+          FLASK_APP: app.py
+
         steps:
           - name: Checkout
             uses: actions/checkout@v5
           
-          - name: Install and run tests
+          - name: Install requirements
             run: |
               pip install -r requirements.txt
               playwright install --with-deps
-              python3 -m pytest -v
+
+          
+          - name: Start server
+            run: |
+              flask run --host=127.0.0.1 --port=5000 &
+              npx wait-on http://127.0.0.1:5000 --timeout 30000
+
+          - name: Run tests
+            run:  python3 -m pytest -v
+
 
           - name: Configure AWS credentials
             uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
