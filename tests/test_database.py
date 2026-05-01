@@ -9,11 +9,6 @@ with open('seed_data/duties.json') as duties:
 with open('seed_data/coins.json') as coins:
     seed_coins = json.load(coins)
 
-# @pytest.fixture
-# def duties_repo():
-#     duties_repo = db(deepcopy(seed_duties), deepcopy(seed_coins))
-#     return duties_repo
-
 @pytest.fixture
 def db_copy():
     return deepcopy(db)
