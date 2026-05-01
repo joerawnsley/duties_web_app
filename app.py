@@ -30,7 +30,6 @@ def add_duty_to_coin(coin_id):
   coin = db_coins.coins_repo.get_coin_by_id(coin_id)
   duties = db_duties.duties_repo.get_duties_by_number(coin["duties"])
   
-  print(error)
   return render_template("coin.html", coin=coin, duties=duties, error=error)
 
 if __name__ == '__main__':
