@@ -1,13 +1,12 @@
-from database import db
+from database import InMemoryDutyRepository
 import json
 import pytest
 from copy import deepcopy
 
-with open('seed_data/duties.json') as duties:
+with open('seed_data/duties.json') as duties, open('seed_data/coins.json') as coins:
     seed_duties = json.load(duties)
-
-with open('seed_data/coins.json') as coins:
     seed_coins = json.load(coins)
+    db = InMemoryDutyRepository(seed_duties, seed_coins)
 
 @pytest.fixture
 def db_copy():
