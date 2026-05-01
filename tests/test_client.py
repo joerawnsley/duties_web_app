@@ -14,7 +14,7 @@ def test_home_page_has_heading():
     assert "<h1>Devops Apprenticeship Coins</h1>" in response.text
 
 def test_home_page_contains_link_to_automate_coin(mocker):
-    mocker.patch("db_coins.coins_repo.list_all_coins", return_value=[
+    mocker.patch("app.db.list_all_coins", return_value=[
     {
         "name": "Automate!",
         "id": "automate",
@@ -31,7 +31,7 @@ def test_home_page_contains_link_to_automate_coin(mocker):
     assert response.text.count("<li>") > 1
 
 def test_number_of_links_on_home_page_matches_number_of_coins(mocker):
-    mocker.patch("db_coins.coins_repo.list_all_coins", return_value=[
+    mocker.patch("app.db.list_all_coins", return_value=[
     {
         "name": "Automate!",
         "id": "automate",
@@ -58,7 +58,7 @@ def test_number_of_links_on_home_page_matches_number_of_coins(mocker):
     assert response.text.count("a href") == 4
 
 def test_home_page_only_contains_links_to_coins_provided_by_db(mocker):
-    mocker.patch("db_coins.coins_repo.list_all_coins", return_value=[
+    mocker.patch("app.db.list_all_coins", return_value=[
     {
         "name": "Call Security",
         "id": "security",
@@ -76,7 +76,7 @@ def test_home_page_only_contains_links_to_coins_provided_by_db(mocker):
     assert response.text.count("<li>") > 1
     
 def test_home_page_notifies_user_if_coins_not_available(mocker):
-    mocker.patch("db_coins.coins_repo.list_all_coins", return_value=None)
+    mocker.patch("app.db.list_all_coins", return_value=None)
     response = test_app.get("/")
     assert "<a href='/automate'" not in response.text and '<a href="/automate"' not in response.text
     assert "There are no coins to display" in response.text
@@ -89,7 +89,7 @@ def test_automate_page_has_heading():
     assert "<h1>Coin: Automate!</h1>" in response.text
 
 def test_houston_page_has_heading(mocker):
-    mocker.patch('db_coins.coins_repo.get_coin_by_id', return_value={
+    mocker.patch('app.db.get_coin_by_id', return_value={
         "name": "Houston, Prepare to Launch",
         "id": "houston",
         "duties": [5, 7, 10]
@@ -98,7 +98,7 @@ def test_houston_page_has_heading(mocker):
     assert "<h1>Coin: Houston, Prepare to Launch</h1>" in response.text
     
 def test_houston_page_has_duties(mocker):
-    mocker.patch('db_coins.coins_repo.get_coin_by_id', return_value={
+    mocker.patch('app.db.get_coin_by_id', return_value={
         "name": "Houston, Prepare to Launch",
         "id": "houston",
         "duties": [5, 7, 10]

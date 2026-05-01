@@ -7,7 +7,7 @@ test_app = app.test_client()
 
 # get home page with mock data
 def get_home_page(mocker):    
-    mocker.patch('db_coins.coins_repo.list_all_coins', return_value=[
+    mocker.patch('db.list_all_coins', return_value=[
     {
         "name": "Automate!",
         "id": "automate",
@@ -24,7 +24,7 @@ def get_home_page(mocker):
 
 # get automate page with mock data
 def get_automate_page(mocker):
-    mocker.patch('db_coins.coins_repo.get_coin_by_id', return_value={
+    mocker.patch('db.get_coin_by_id', return_value={
         "name": "Automate!",
         "id": "automate",
         "duties": [5, 7, 10]
