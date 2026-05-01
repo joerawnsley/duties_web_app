@@ -1,8 +1,18 @@
 from flask import Flask, render_template, request
 import db_coins, db_duties
-from database import db
+from database import DatabaseDutyRepository, InMemoryDutyRepository
+import json
+
 app = Flask(__name__)
 
+dabatase_location = "memory"
+
+if dabatase_location == "memory":
+  with open('seed_data/duties.json') as duties, open('seed_data/coins.json') as coins:
+      db = InMemoryDutyRepository(json.load(duties), json.load(coins))
+      
+elif dabatase_location == "real_db":
+  db = DatabaseDutyRepository()
 
 @app.route('/')
 def index():

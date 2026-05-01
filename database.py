@@ -79,11 +79,3 @@ class InMemoryDutyRepository(DutyRepository):
                 coin["duties"].append(duty_number)
                 coin["duties"].sort()
 
-dabatase_location = "memory"
-
-if dabatase_location == "memory":
-  with open('seed_data/duties.json') as duties, open('seed_data/coins.json') as coins:
-      db = InMemoryDutyRepository(json.load(duties), json.load(coins))
-      
-elif dabatase_location == "real_db":
-  db = DatabaseDutyRepository()
