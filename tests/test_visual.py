@@ -1,9 +1,10 @@
 from app import app
 import webbrowser
 from pathlib import Path
-import json
 
 test_app = app.test_client()
+
+# used during early development to view what pages would look like before the in-memory database was implemented
 
 # get home page with mock data
 def get_home_page(mocker):    
