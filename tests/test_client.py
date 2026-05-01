@@ -14,7 +14,7 @@ def test_home_page_has_heading():
     assert "<h1>Devops Apprenticeship Coins</h1>" in response.text
 
 def test_home_page_contains_link_to_automate_coin(mocker):
-    mocker.patch("db_coins.coins_repo.list_all_coins", return_value=[
+    mocker.patch("app.db.list_all_coins", return_value=[
     {
         "name": "Automate!",
         "id": "automate",
@@ -31,7 +31,7 @@ def test_home_page_contains_link_to_automate_coin(mocker):
     assert response.text.count("<li>") > 1
 
 def test_number_of_links_on_home_page_matches_number_of_coins(mocker):
-    mocker.patch("db_coins.coins_repo.list_all_coins", return_value=[
+    mocker.patch("app.db.list_all_coins", return_value=[
     {
         "name": "Automate!",
         "id": "automate",
@@ -58,7 +58,7 @@ def test_number_of_links_on_home_page_matches_number_of_coins(mocker):
     assert response.text.count("a href") == 4
 
 def test_home_page_only_contains_links_to_coins_provided_by_db(mocker):
-    mocker.patch("db_coins.coins_repo.list_all_coins", return_value=[
+    mocker.patch("app.db.list_all_coins", return_value=[
     {
         "name": "Call Security",
         "id": "security",
@@ -76,7 +76,7 @@ def test_home_page_only_contains_links_to_coins_provided_by_db(mocker):
     assert response.text.count("<li>") > 1
     
 def test_home_page_notifies_user_if_coins_not_available(mocker):
-    mocker.patch("db_coins.coins_repo.list_all_coins", return_value=None)
+    mocker.patch("app.db.list_all_coins", return_value=None)
     response = test_app.get("/")
     assert "<a href='/automate'" not in response.text and '<a href="/automate"' not in response.text
     assert "There are no coins to display" in response.text
@@ -89,7 +89,7 @@ def test_automate_page_has_heading():
     assert "<h1>Coin: Automate!</h1>" in response.text
 
 def test_houston_page_has_heading(mocker):
-    mocker.patch('db_coins.coins_repo.get_coin_by_id', return_value={
+    mocker.patch('app.db.get_coin_by_id', return_value={
         "name": "Houston, Prepare to Launch",
         "id": "houston",
         "duties": [5, 7, 10]
@@ -98,12 +98,12 @@ def test_houston_page_has_heading(mocker):
     assert "<h1>Coin: Houston, Prepare to Launch</h1>" in response.text
     
 def test_houston_page_has_duties(mocker):
-    mocker.patch('db_coins.coins_repo.get_coin_by_id', return_value={
+    mocker.patch('app.db.get_coin_by_id', return_value={
         "name": "Houston, Prepare to Launch",
         "id": "houston",
         "duties": [5, 7, 10]
     })
-    mocker.patch('db_duties.duties_repo.get_duties_by_number', return_value=[
+    mocker.patch('app.db.get_duties_by_number', return_value=[
         { "number": 5, "description": "Build and operate" },
         { "number": 7, "description": "Provision cloud infrastructure" },
         { "number": 10, "description": "Implement monitoring" }
@@ -123,8 +123,8 @@ def test_form_submit_displays_new_duties():
 
 # patch db functions, check that save_duty was called and simulate the output of the database
 def test_form_submit_updates_duties(mocker):
-    mock_save_duty = mocker.patch("db_duties.duties_repo.save_duty")
-    mocker.patch("db_duties.duties_repo.get_duties_by_number", return_value=[
+    mock_save_duty = mocker.patch("app.db.save_duty")
+    mocker.patch("app.db.get_duties_by_number", return_value=[
             { "number": 1, "description": "Script and script some more" },
             { "number": 2, "description": "Deploy continuously" },
             { "number": 3, "description": "Automate stuff" }
@@ -136,8 +136,8 @@ def test_form_submit_updates_duties(mocker):
 
 # triangulation with similar test
 def test_post_route_adds_duty_to_existing_duties(mocker):
-    mock_save_duty = mocker.patch("db_duties.duties_repo.save_duty")
-    mocker.patch("db_duties.duties_repo.get_duties_by_number", return_value=[
+    mock_save_duty = mocker.patch("app.db.save_duty")
+    mocker.patch("app.db.get_duties_by_number", return_value=[
             { "number": 1, "description": "Script and code"},
             { "number": 2, "description": "Deploy continuously" },
             { "number": 4, "description": "Continuously integrate" }
