@@ -103,7 +103,7 @@ def test_houston_page_has_duties(mocker):
         "id": "houston",
         "duties": [5, 7, 10]
     })
-    mocker.patch('db_duties.duties_repo.get_duties_by_number', return_value=[
+    mocker.patch('app.db.get_duties_by_number', return_value=[
         { "number": 5, "description": "Build and operate" },
         { "number": 7, "description": "Provision cloud infrastructure" },
         { "number": 10, "description": "Implement monitoring" }
@@ -123,8 +123,8 @@ def test_form_submit_displays_new_duties():
 
 # patch db functions, check that save_duty was called and simulate the output of the database
 def test_form_submit_updates_duties(mocker):
-    mock_save_duty = mocker.patch("db_duties.duties_repo.save_duty")
-    mocker.patch("db_duties.duties_repo.get_duties_by_number", return_value=[
+    mock_save_duty = mocker.patch("app.db.save_duty")
+    mocker.patch("app.db.get_duties_by_number", return_value=[
             { "number": 1, "description": "Script and script some more" },
             { "number": 2, "description": "Deploy continuously" },
             { "number": 3, "description": "Automate stuff" }
@@ -136,8 +136,8 @@ def test_form_submit_updates_duties(mocker):
 
 # triangulation with similar test
 def test_post_route_adds_duty_to_existing_duties(mocker):
-    mock_save_duty = mocker.patch("db_duties.duties_repo.save_duty")
-    mocker.patch("db_duties.duties_repo.get_duties_by_number", return_value=[
+    mock_save_duty = mocker.patch("app.db.save_duty")
+    mocker.patch("app.db.get_duties_by_number", return_value=[
             { "number": 1, "description": "Script and code"},
             { "number": 2, "description": "Deploy continuously" },
             { "number": 4, "description": "Continuously integrate" }
