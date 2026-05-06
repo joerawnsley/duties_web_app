@@ -3,6 +3,8 @@ from playwright.sync_api import Page, expect
 
 url = "http://127.0.0.1:5000"
 
+# these are end-to-end tests, testing different user journeys as they navigate through the app
+
 def test_returns_status_200(page: Page):
     response = page.request.get(url)
     expect(response).to_be_ok()

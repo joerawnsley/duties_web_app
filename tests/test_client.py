@@ -1,6 +1,6 @@
 from app import app
 
-# these are integration tests as they test how the app integrates with templates, given a mock resopnse from the db
+# These are integration tests - they test how the app integrates with templates, using a mocked response from the database
 
 test_app = app.test_client()
 

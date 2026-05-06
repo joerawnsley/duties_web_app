@@ -3,6 +3,8 @@ import json
 import pytest
 from copy import deepcopy
 
+# these are unit tests for the in-memory database. They use a fixture to create a copy of the database so that each test is isolated and doesn't affect other tests
+
 with open('seed_data/duties.json') as duties, open('seed_data/coins.json') as coins:
     seed_duties = json.load(duties)
     seed_coins = json.load(coins)
