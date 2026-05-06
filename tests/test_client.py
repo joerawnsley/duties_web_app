@@ -1,6 +1,6 @@
 from app import app
 
-# These are integration tests - they test how the app integrates with templates and database. Tests where pytest mocker is passed in mock a database response, and test the integartion between app.py and the templates. Other tests don't use mocker but use the in-memory database instead. They test how the app integrates with the database.
+# These are integration tests - they test how the app integrates with templates, using a mocked response from the database
 
 test_app = app.test_client()
 
