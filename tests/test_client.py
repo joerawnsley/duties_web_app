@@ -133,6 +133,7 @@ def test_form_submit_updates_duties(mocker):
     mock_save_duty.assert_called_with(1, "Script and script some more")
     assert "<li><b>Duty 1:</b> Script and code</li>" not in response.text
     assert "<li><b>Duty 1:</b> Script and script some more</li>" in response.text
+    assert "Error" not in response.text
 
 # triangulation with similar test
 def test_post_route_adds_duty_to_existing_duties(mocker):
@@ -148,3 +149,22 @@ def test_post_route_adds_duty_to_existing_duties(mocker):
     assert "<li><b>Duty 2:</b> Deploy continuously</li>" in response.text
     assert "<li><b>Duty 3:</b>" not in response.text
     assert "<li><b>Duty 4:</b> Continuously integrate</li>" in response.text
+    assert "Error" not in response.text
+
+    
+# test error message
+def test_duty_number_must_be_parsable_as_int(mocker):
+    mock_save_duty = mocker.patch("app.db.save_duty")
+    mocker.patch("app.db.get_duties_by_number", return_value=[
+            { "number": 1, "description": "Script and code"},
+            { "number": 2, "description": "Deploy continuously" },
+            { "number": 3, "description": "Automate stuff" }
+    ])
+    response = test_app.post("coin/security", data={"number": "asdf", "description": "Continuously integrate"})
+    mock_save_duty.assert_not_called()
+    assert "<li><b>Duty 1:</b> Script and code</li>" in response.text
+    assert "<li><b>Duty 2:</b> Deploy continuously</li>" in response.text
+    assert "Error" in response.text
+    assert "<li><b>Duty 4:</b> Continuously integrate</li>" not in response.text
+    
+
