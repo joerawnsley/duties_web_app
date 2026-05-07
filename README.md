@@ -38,5 +38,5 @@ You may also need to create an ECR repository to push the image to.
 - update the final run step in .github/workflows/deploy.yaml with:
                
         docker build -t duties-app .
-        docker tag duties-app:latest [your ECR-URI]
+        docker tag duties-app:latest [your ECR URI]
         docker push [your ECR URI] 
