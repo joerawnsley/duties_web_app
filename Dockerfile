@@ -1,10 +1,10 @@
 FROM  --platform=linux/amd64 python:3.12-slim
     
-RUN   mkdir  /var/flasksite
+RUN   mkdir  /var/duties-app
 
-COPY  .  /var/flasksite/
+COPY  .  /var/duties-app/
 
-WORKDIR  /var/flasksite/
+WORKDIR  /var/duties-app/
 
 RUN pip install --upgrade pip
 
